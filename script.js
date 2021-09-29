@@ -1,6 +1,7 @@
 const body = document.querySelector('body');
 const cryptoLabel = document.querySelector('.crypto-data')
 const upperPart = document.querySelector('.upper-part');
+const cryptoLeft = document.querySelector('.crypto-left');
 
 async function getFetch() {
     const getBackgroundImage = await fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature');
@@ -11,8 +12,10 @@ async function getFetch() {
     const resolveName = await getCryptoName.json();
     cryptoLabel.textContent = resolveName.name;
     const coinImg = document.createElement('img');
-    upperPart.prepend(coinImg, cryptoLabel);
-    coinImg.setAttribute('src', `${resolveName.image.thumb}`);
+    cryptoLeft.prepend(coinImg, cryptoLabel);
+    coinImg.setAttribute('src', `${resolveName.image.small}`);
+    coinImg.style.width = '40px';
+    coinImg.style.objectFit = 'contain';
     
     
 }
