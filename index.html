@@ -16,7 +16,17 @@
             <div class="crypto-left flex items-start p-0 m-0 justify-between w-full">
                 <div class="crypto-info">
                     <div class="crypto-upper-part flex items-center">
-                        <p class="crypto-data pl-2"></p>
+                        <p class="menu-dropdown crypto-data pl-2 relative inline-block"></p>
+                        <div class="items-dropdown hidden absolute bg-white bg-opacity-80 min-w-min top-3 left-16 shadow-xl py-4 px-4 z-10 hover:block">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">Dogecoin</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">Bitcoin</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">Etherum</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">Axies</a>
+                        </div>
                     </div>
                     <div>
                         <p class="crypto-price py-l px-12"></p>
@@ -35,6 +45,7 @@
             <p>Options</p>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="script.js"></script>
 </body>
 

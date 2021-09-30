@@ -3,12 +3,14 @@ const cryptoLabel = document.querySelector('.crypto-data')
 const authorLabel = document.querySelector('.author-label');
 const cryptoPrice = document.querySelector('.crypto-price');
 const cryptoUpperPart = document.querySelector('.crypto-upper-part');
+const menuDropdown = document.querySelector('.menu-dropdown');
+const itemsDropdown = document.querySelector('.items-dropdown');
 
 async function getFetch() {
         const getBackgroundImage = await fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature');
         const resolve = await getBackgroundImage.json();
         body.style.backgroundImage = `url('${resolve.urls.regular}')`;
-        authorLabel.textContent = `${resolve.user.name}`;
+        authorLabel.textContent = `Author: ${resolve.user.name}`;
 
         const getCryptoName = await fetch('https://api.coingecko.com/api/v3/coins/dogecoin');
         const resolveName = await getCryptoName.json();
@@ -23,3 +25,10 @@ async function getFetch() {
 }
 
 getFetch();
+
+// Dropdown menu
+
+menuDropdown.addEventListener('click', () => {
+    const cryptos = ['bitcoin', 'dogecoin', 'etherum', 'axies'];
+    itemsDropdown.style.display = 'block';
+})
