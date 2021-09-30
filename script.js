@@ -1,9 +1,8 @@
 const body = document.querySelector('body');
 const cryptoLabel = document.querySelector('.crypto-data')
-const upperPart = document.querySelector('.upper-part');
-const cryptoLeft = document.querySelector('.crypto-left');
 const authorLabel = document.querySelector('.author-label');
 const cryptoPrice = document.querySelector('.crypto-price');
+const cryptoUpperPart = document.querySelector('.crypto-upper-part');
 
 async function getFetch() {
         const getBackgroundImage = await fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature');
@@ -15,11 +14,11 @@ async function getFetch() {
         const resolveName = await getCryptoName.json();
         cryptoLabel.textContent = resolveName.name;
         const coinImg = document.createElement('img');
-        cryptoLeft.prepend(coinImg, cryptoLabel);
+        cryptoUpperPart.prepend(coinImg, cryptoLabel);
         coinImg.setAttribute('src', `${resolveName.image.small}`);
         coinImg.style.width = '40px';
         coinImg.style.objectFit = 'contain';
-        cryptoPrice.textContent = `${resolveName.market_data.current_price.usd}`
+        cryptoPrice.textContent = `${resolveName.market_data.current_price.usd} USD`;
 
 }
 
