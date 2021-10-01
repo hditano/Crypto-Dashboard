@@ -26,7 +26,6 @@ async function getFetch() {
 }
 
 getFetch();
-getDay();
 
 // Dropdown menu
 // TODO
@@ -36,10 +35,14 @@ function getDay() {
     let date = new Date();
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     let getDay = days[date.getDay()];
-    timeLabel.textContent = `${getDay} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} -  ${date.getFullYear()}`;
+    timeLabel.textContent = `${getDay} ${date.toLocaleTimeString('en-US')}`;
 
 }
 
+navigator.geolocation.getCurrentPosition(position => {
+    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
+        .then(resp => resp.json())
+        .then(resol => console.log(resol));
+});
 
-getDay();
-setInterval(getDay, 100);
+setInterval(getDay, 1000);
