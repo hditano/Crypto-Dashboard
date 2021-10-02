@@ -3,14 +3,15 @@ const cryptoLabel = document.querySelector('.crypto-data')
 const authorLabel = document.querySelector('.author-label');
 const cryptoPrice = document.querySelector('.crypto-price');
 const cryptoUpperPart = document.querySelector('.crypto-upper-part');
-const menuDropdown = document.querySelector('.menu-dropdown');
-const itemsDropdown = document.querySelector('.items-dropdown');
 const timeLabel = document.querySelector('.time-label');
+const weatherTab = document.querySelector('.weather-tab');
+const iconURL = 'http://openweathermap.org/img/wn/'
 
 async function getFetch() {
     const getBackgroundImage = await fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature');
     const resolve = await getBackgroundImage.json();
     body.style.backgroundImage = `url('${resolve.urls.regular}')`;
+    body.style.textShadow = '0px 0px 20px #242424';
     authorLabel.textContent = `Author: ${resolve.user.name}`;
 
     const getCryptoName = await fetch('https://api.coingecko.com/api/v3/coins/dogecoin');
@@ -39,10 +40,21 @@ function getDay() {
 
 }
 
-navigator.geolocation.getCurrentPosition(position => {
-    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
-        .then(resp => resp.json())
-        .then(resol => console.log(resol));
-});
+function getGeo() {
 
-setInterval(getDay, 1000);
+
+    navigator.geolocation.getCurrentPosition(position => {
+        fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
+            .then(resp => resp.json())
+            .then(resol => 
+                weatherTab.innerHTML = `<div class="flex items-center m-0 pr-2 w-full justify-end">
+                                        <img src="${iconURL}${resol.weather[0].icon}.png" class="w-20">
+                                        <p class="weather-data">${Math.floor(resol.main.temp)}º</p>
+                                        </div>
+                                        <p class="py-0 text-left">${resol.name}</p>`)
+            .catch(err => weatherData.textContent = `Weather Data not available`)
+    });
+}
+
+    getGeo();
+    setInterval(getDay, 1000);
