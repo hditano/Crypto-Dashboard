@@ -9,15 +9,15 @@
     <title>Document</title>
 </head>
 
-<body
-    class="bg-no-repeat bg-center bg-center bg-fixed bg-cover bg-opacity-20 font-arial text-lg text-white font-bold">
+<body class="bg-no-repeat bg-center bg-center bg-fixed bg-cover bg-opacity-20 font-arial text-lg text-white font-bold">
     <div class="container w-screen h-screen m-0">
         <div class="upper-part flex  px-4 py-2 h-1/4">
             <div class="crypto-left flex items-start p-0 m-0 justify-between w-full">
                 <div class="crypto-info py-3">
                     <div class="crypto-upper-part flex items-center">
                         <p class="crypto-data pl-2 relative inline-block"></p>
-                        <div class="items-dropdown hidden absolute bg-white bg-opacity-80 min-w-min top-3 left-16 shadow-xl py-4 px-4 z-10">
+                        <div
+                            class="items-dropdown hidden absolute bg-white bg-opacity-80 min-w-min top-3 left-16 shadow-xl py-4 px-4 z-10">
                             <a href="#"
                                 class="items-dropdown dogecoin block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">Dogecoin</a>
                             <a href="#"
@@ -42,7 +42,14 @@
         </div>
         <div class="bottom-part flex justify-between items-end px-4 py-2 h-1/4">
             <p class="author-label">Author</p>
-            <p>Options</p>
+            <div class="options-iframe">
+                <p class="options-label">Options</p>
+                <div class="modal absolute w-80 h-40 z-50 bottom-10 left-3/4 bg-gray-500 hidden">
+                    <p>Hello World</p>
+                    <p>This is a Test</p>
+                    <p class="close">X</p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>

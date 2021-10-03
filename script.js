@@ -6,6 +6,9 @@ const cryptoUpperPart = document.querySelector('.crypto-upper-part');
 const timeLabel = document.querySelector('.time-label');
 const weatherTab = document.querySelector('.weather-tab');
 const iconURL = 'http://openweathermap.org/img/wn/'
+const optionsLabel = document.querySelector('.options-label');
+const modalWindow = document.querySelector('.modal');
+const closeModal = document.querySelector('.close');
 
 async function getFetch() {
     const getBackgroundImage = await fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature');
@@ -46,7 +49,7 @@ function getGeo() {
     navigator.geolocation.getCurrentPosition(position => {
         fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
             .then(resp => resp.json())
-            .then(resol => 
+            .then(resol =>
                 weatherTab.innerHTML = `<div class="flex items-center m-0 pr-2 w-full justify-end">
                                         <img src="${iconURL}${resol.weather[0].icon}.png" class="w-20">
                                         <p class="weather-data">${Math.floor(resol.main.temp)}º</p>
@@ -56,5 +59,14 @@ function getGeo() {
     });
 }
 
-    getGeo();
-    setInterval(getDay, 1000);
+getGeo();
+setInterval(getDay, 1000);
+
+optionsLabel.addEventListener('click', () => {
+    modalWindow.style.display = 'block';
+})
+
+closeModal.addEventListener('click', () => {
+    console.log('clicked');
+    modalWindow.style.display = 'none';
+})
