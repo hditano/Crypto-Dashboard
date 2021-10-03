@@ -43,16 +43,16 @@
         <div class="bottom-part flex justify-between items-end px-4 py-2 h-1/4">
             <p class="author-label">Author</p>
             <div class="options-iframe">
-                <p class="options-label">Options</p>
-                <div class="modal absolute w-80 h-40 z-50 bottom-10 left-3/4 bg-gray-500 hidden">
-                    <p>Hello World</p>
-                    <p>This is a Test</p>
-                    <p class="close">X</p>
+                <p class="options-label cursor-pointer">Options</p>
+                <div class="modal absolute w-80 h-40 z-50 bottom-10 left-3/4 bg-gray-300 hidden text-gray-700">
+                    <p class="close flex justify-end align-top pr-1 pt-0 cursor-pointer">x</p>
+                    <p class="pl-2">Hello World</p>
+                    <label class="pl-2" for="coin-menu">Coin: </label>
+                    <select class="coin-menu" name="coin-menu" id="coin-menu"></select>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="script.js"></script>
 </body>
 

@@ -1,3 +1,4 @@
+//DOM Elements
 const body = document.querySelector('body');
 const cryptoLabel = document.querySelector('.crypto-data')
 const authorLabel = document.querySelector('.author-label');
@@ -5,10 +6,17 @@ const cryptoPrice = document.querySelector('.crypto-price');
 const cryptoUpperPart = document.querySelector('.crypto-upper-part');
 const timeLabel = document.querySelector('.time-label');
 const weatherTab = document.querySelector('.weather-tab');
-const iconURL = 'http://openweathermap.org/img/wn/'
 const optionsLabel = document.querySelector('.options-label');
 const modalWindow = document.querySelector('.modal');
 const closeModal = document.querySelector('.close');
+const coinMenu = document.querySelector('.coin-menu');
+
+// API URL
+const iconURL = 'http://openweathermap.org/img/wn/'
+
+//Global Variables
+const coinArray = ['bitcoin', 'ethereum', 'cardano', 'binance-coin', 'tether', 'solana', 'xrp', 'polkadot', 'terra-luna']
+let coinChosen = 'bitcoin';
 
 async function getFetch() {
     const getBackgroundImage = await fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature');
@@ -17,7 +25,7 @@ async function getFetch() {
     body.style.textShadow = '0px 0px 20px #242424';
     authorLabel.textContent = `Author: ${resolve.user.name}`;
 
-    const getCryptoName = await fetch('https://api.coingecko.com/api/v3/coins/dogecoin');
+    const getCryptoName = await fetch(`https://api.coingecko.com/api/v3/coins/${coinChosen}`);
     const resolveName = await getCryptoName.json();
     cryptoLabel.textContent = resolveName.name;
     const coinImg = document.createElement('img');
@@ -64,6 +72,15 @@ setInterval(getDay, 1000);
 
 optionsLabel.addEventListener('click', () => {
     modalWindow.style.display = 'block';
+    for(let i = 0; i < coinArray.length; i++) {
+        let opt = coinArray[i];
+        let el = document.createElement('option');
+        el.textContent = opt;
+        el.value = opt;
+        coinMenu.appendChild(el);
+    }
+
+
 })
 
 closeModal.addEventListener('click', () => {
