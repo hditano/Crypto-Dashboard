@@ -15,29 +15,38 @@ const coinMenu = document.querySelector('.coin-menu');
 const iconURL = 'http://openweathermap.org/img/wn/'
 
 //Global Variables
-const coinArray = ['bitcoin', 'ethereum', 'cardano', 'binance-coin', 'tether', 'solana', 'xrp', 'polkadot', 'terra-luna']
+const coinArray = ['bitcoin', 'ethereum', 'cardano', 'litecoin', 'tether', 'solana', 'uniswap', 'polkadot', 'terra-luna', 'polygon', 'stellar', 'axie-infinity']
 let coinChosen = 'bitcoin';
 
 async function getFetch() {
-    const getBackgroundImage = await fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature');
-    const resolve = await getBackgroundImage.json();
-    body.style.backgroundImage = `url('${resolve.urls.regular}')`;
-    body.style.textShadow = '0px 0px 20px #242424';
-    authorLabel.textContent = `Author: ${resolve.user.name}`;
+    cryptoUpperPart.innerHTML = '';
+    cryptoPrice.innerHTML = '';
 
-    const getCryptoName = await fetch(`https://api.coingecko.com/api/v3/coins/${coinChosen}`);
-    const resolveName = await getCryptoName.json();
-    cryptoLabel.textContent = resolveName.name;
-    const coinImg = document.createElement('img');
-    cryptoUpperPart.prepend(coinImg, cryptoLabel);
-    coinImg.setAttribute('src', `${resolveName.image.small}`);
-    coinImg.style.width = '40px';
-    coinImg.style.objectFit = 'contain';
-    cryptoPrice.textContent = `${resolveName.market_data.current_price.usd} USD`;
+    try {
+        const getBackgroundImage = await fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature');
+        const resolve = await getBackgroundImage.json();
+        body.style.backgroundImage = `url('${resolve.urls.regular}')`;
+        body.style.textShadow = '0px 0px 20px #242424';
+        authorLabel.textContent = `Author: ${resolve.user.name}`;
+    
+        const getCryptoName = await fetch(`https://api.coingecko.com/api/v3/coins/${coinChosen}`);
+        const resolveName = await getCryptoName.json();
+        cryptoLabel.textContent = resolveName.name;
+        const coinImg = document.createElement('img');
+        cryptoUpperPart.prepend(coinImg, cryptoLabel);
+        coinImg.setAttribute('src', `${resolveName.image.small}`);
+        coinImg.style.width = '40px';
+        coinImg.style.objectFit = 'contain';
+        cryptoPrice.textContent = `${resolveName.market_data.current_price.usd} USD`;
+    } catch (error) {
+        console.error(`Error logged: ${error}`);
+    }
 
 }
 
 getFetch();
+getGeo();
+setInterval(getDay, 1000);
 
 // Dropdown menu
 // TODO
@@ -67,11 +76,10 @@ function getGeo() {
     });
 }
 
-getGeo();
-setInterval(getDay, 1000);
 
 optionsLabel.addEventListener('click', () => {
     modalWindow.style.display = 'block';
+    coinMenu.innerHTML = '';
     for(let i = 0; i < coinArray.length; i++) {
         let opt = coinArray[i];
         let el = document.createElement('option');
@@ -80,8 +88,12 @@ optionsLabel.addEventListener('click', () => {
         coinMenu.appendChild(el);
     }
 
-
 })
+
+coinMenu.onchange = function () {
+    coinChosen =  coinMenu.value;
+    getFetch();
+}
 
 closeModal.addEventListener('click', () => {
     console.log('clicked');
